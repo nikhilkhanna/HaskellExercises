@@ -230,10 +230,6 @@ baseCircle r = Circle (Point 0 0) r
 baseRect :: Float -> Float -> Shape
 baseRect width height = Rectangle (Point 0 0) (Point width height)
 
-data Person = Person { firstName :: String
-					 , lastName :: String
-					 , age :: Int
-					 } deriving (Eq)
 
 data Car = Car {company :: String
 			   , model :: String
@@ -247,3 +243,18 @@ vplus (Vector i j k) (Vector l m n) = Vector (i+l) (j+m) (k+n)
 
 dotProduct :: (Num t) => Vector t-> Vector t -> t
 dotProduct (Vector i j k) (Vector l m n) = (i*l)+(j*m)+(k*n)
+
+data Person = Person { firstName :: String
+					 , lastName :: String
+					 , age :: Int
+					 } deriving (Eq, Show, Read)
+
+data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
+		   deriving(Eq, Ord, Show, Read, Bounded, Enum)
+
+type PhoneNumber = String
+type Name = String
+type PhoneBook = [(Name,PhoneNumber)]
+
+inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
+inPhoneBook name pnumber pbook = (name,pnumber) `elem` pbook
