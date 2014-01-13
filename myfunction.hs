@@ -1,6 +1,8 @@
 import Data.List
 import qualified Data.Map as Map
+import qualified Data.Set as Set
 import Data.Char
+import Geometry
 
 boomBang :: [Int]-> [[Char]]
 boomBang xs = [if x <10 then "Boom" else "Bang" | x<-xs, odd x]
@@ -194,3 +196,54 @@ decode shift msg = encode (negate shift) msg
 
 findKey :: (Eq k) => k -> [(k,v)] -> Maybe v
 findKey key = foldr (\(k,v) acc-> if key == k then Just v else acc) Nothing
+
+phoneBook =   
+    [("betty","555-2938")  
+    ,("betty","342-2492")  
+    ,("bonnie","452-2928")  
+    ,("patsy","493-2928")  
+    ,("patsy","943-2929")  
+    ,("patsy","827-9162")  
+    ,("lucille","205-2928")  
+    ,("wendy","939-8282")  
+    ,("penny","853-2492")  
+    ,("penny","555-2111")  
+    ]  
+
+phoneBookToMap :: (Ord k) => [(k, String)] -> Map.Map k String  
+phoneBookToMap xs = Map.fromListWith (\number1 number2 -> number1 ++ ", " ++ number2) xs 
+
+data Point = Point Float Float deriving (Show)
+data Shape = Circle Point Float | Rectangle Point Point deriving (Show)
+
+surface :: Shape->Float
+surface (Circle _ r) = r^2*pi
+surface (Rectangle (Point x1 y1)(Point x2 y2)) = (abs $ x1-x2)*(abs $ y1-y2)
+
+move :: Shape -> Float -> Float -> Shape
+move (Circle (Point x y) r) a b = Circle (Point (x+a) (y+b)) r 
+move (Rectangle (Point x1 y1) (Point x2 y2)) a b = Rectangle (Point (x1+a) (y1+b)) (Point (x2+a) (y2+b))
+
+baseCircle :: Float -> Shape
+baseCircle r = Circle (Point 0 0) r
+
+baseRect :: Float -> Float -> Shape
+baseRect width height = Rectangle (Point 0 0) (Point width height)
+
+data Person = Person { firstName :: String
+					 , lastName :: String
+					 , age :: Int
+					 } deriving (Eq)
+
+data Car = Car {company :: String
+			   , model :: String
+			   , year :: Int
+			   } deriving (Show)  
+
+data Vector a = Vector a a a deriving(Show)
+
+vplus :: (Num t) => Vector t -> Vector t -> Vector t
+vplus (Vector i j k) (Vector l m n) = Vector (i+l) (j+m) (k+n)
+
+dotProduct :: (Num t) => Vector t-> Vector t -> t
+dotProduct (Vector i j k) (Vector l m n) = (i*l)+(j*m)+(k*n)
