@@ -354,5 +354,5 @@ instance YesNo Int where
 	yesno 0 = False
 	yesno _ = True
 
-yesnoIf:: (YesNo y) => y -> a -> a -> a
+yesnoIf :: (YesNo y) => y -> a -> a -> a
 yesnoIf yesnoVal yesResult noResult = if yesno yesnoVal then yesResult else noResult 
