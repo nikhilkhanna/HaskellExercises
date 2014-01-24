@@ -160,7 +160,7 @@ elem' :: (Eq a) => a-> [a] -> Bool
 elem' x = foldl (\acc y->if x==y then True else acc) False
 
 map' :: (a->b) -> [a] -> [b]
-map' f xs = foldr(\y acc-> f y : acc) [] xs
+map' f = foldr(\y acc-> f y : acc) []
 
 maximum' :: (Ord a) => [a] -> a
 maximum' xs = foldl1 (\acc y -> if y > acc then y else acc) xs
