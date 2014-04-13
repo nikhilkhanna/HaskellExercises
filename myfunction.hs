@@ -27,7 +27,7 @@ factorial :: Int -> Int
 factorial 0 = 1;
 factorial n = n*factorial(n-1)
 
-addVectors :: (Num a) => (a, a, a) -> (a,a ,a) -> (a,a,a)
+addVectors :: (Num a) => (a, a, a) -> (a, a ,a) -> (a,a,a)
 addVectors (x1,y1,z1) (x2,y2,z2) = (x1+x2,y1+y2,z1+z2)
 
 capital :: String -> String
@@ -59,8 +59,6 @@ calcAges dates = [age c b | (c,b)<-dates]
 	where age current birth = current-birth
 
 cube :: (RealFloat a) => a->a
-
-
 cube side =
 	let sideArea = side^2
 	in sideArea*6
@@ -82,6 +80,10 @@ take' n (first:items) = first: take' (n-1) items
 
 repeat' :: a -> [a]
 repeat' x = x: repeat' x
+
+repeatNum :: Int -> a -> [a]
+repeatNum 0 _ = []
+repeatNum num elem = elem : repeatNum (num-1) elem
 
 zip' :: [a] ->[b] -> [(a,b)]
 zip' [] _ = []
