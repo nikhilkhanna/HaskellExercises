@@ -27,7 +27,7 @@ myReverse xs = myReverse' xs []
 		myReverse' [] reversed = reversed
 		myReverse' (x:xs) reversed = myReverse' xs (x:reversed)
 
---problem 6 -- 
+--problem 6 --
 isPalindrome :: (Eq a) => [a] -> Bool
 isPalindrome xs = xs == myReverse xs
 
@@ -37,7 +37,7 @@ isPalindrome xs = xs == myReverse xs
 --problem 8 --
 compress :: (Eq a) => [a] -> [a]
 compress [] = []
-compress (x:xs) = x : (compress $ dropWhile (== x) xs) 
+compress (x:xs) = x : (compress $ dropWhile (== x) xs)
 
 --problem 9 --
 pack :: (Eq a) => [a] -> [[a]]
@@ -47,3 +47,17 @@ pack (x:xs) = (x : takeWhile(== x) xs) : pack (dropWhile (== x) xs)
 --problem 10 --
 encode :: (Eq a) => [a] -> [(Int, a)]
 encode xs = [(myLength' ys, head ys)| ys <- (pack xs)]
+
+--problem 14 --
+dupli :: [a] -> [a]
+dupli [] = []
+dupli (x:xs) = x:x:dupli xs
+
+--problem 15 --
+repeatNTimes :: a -> Int -> [a]
+repeatNTimes _ 0 = []
+repeatNTimes a n = a:repeatNTimes a (n-1)
+
+repli :: [a] -> Int -> [a]
+repli [] _ = []
+repli (x:xs) num = repeatNTimes	x num ++ repli xs num
